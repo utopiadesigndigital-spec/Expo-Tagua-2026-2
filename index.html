@@ -2,10 +2,10 @@
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=192, height=384, initial-scale=1.0">
+<meta name="viewport"
+      content="width=192, height=384, initial-scale=1.0">
 
 <title>Expo Taguaí 2026</title>
 
@@ -21,24 +21,19 @@ html,
 body {
     width: 192px;
     height: 384px;
-    margin: 0;
-    padding: 0;
     overflow: hidden;
     background: #000;
 }
 
 #tela {
     position: relative;
-
     width: 192px;
     height: 384px;
-
     overflow: hidden;
 }
 
 #fundo {
     position: absolute;
-
     left: 0;
     top: 0;
 
@@ -50,6 +45,87 @@ body {
     object-fit: fill;
 }
 
+/* ÁREA DA CONTAGEM */
+
+#contador {
+    position: absolute;
+
+    left: 12px;
+    top: 225px;
+
+    width: 168px;
+
+    text-align: center;
+
+    font-family: Arial, sans-serif;
+
+    color: #fff;
+}
+
+/* TEXTO "FALTAM" */
+
+#titulo {
+    font-size: 11px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 7px;
+
+    text-shadow:
+        0 0 4px #000,
+        0 0 8px #000;
+}
+
+/* NÚMEROS */
+
+#numeros {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 7px;
+}
+
+/* CADA BLOCO */
+
+.bloco {
+    text-align: center;
+}
+
+/* NÚMERO */
+
+.numero {
+    font-size: 27px;
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 4px #000,
+        0 0 8px #000;
+}
+
+/* LABEL */
+
+.label {
+    margin-top: 3px;
+
+    font-size: 7px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 3px #000;
+}
+
 </style>
 
 </head>
@@ -58,13 +134,140 @@ body {
 
 <div id="tela">
 
+    <!-- FUNDO DA EXPO -->
+
     <img
         id="fundo"
         src="fundo_expo.png"
         alt="Expo Taguaí 2026"
     >
 
+    <!-- CONTAGEM -->
+
+    <div id="contador">
+
+        <div id="titulo">
+            FALTAM
+        </div>
+
+        <div id="numeros">
+
+            <div class="bloco">
+                <div class="numero" id="dias">00</div>
+                <div class="label">DIAS</div>
+            </div>
+
+            <div class="bloco">
+                <div class="numero" id="horas">00</div>
+                <div class="label">HORAS</div>
+            </div>
+
+            <div class="bloco">
+                <div class="numero" id="minutos">00</div>
+                <div class="label">MINUTOS</div>
+            </div>
+
+            <div class="bloco">
+                <div class="numero" id="segundos">00</div>
+                <div class="label">SEGUNDOS</div>
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
+
+
+<script>
+
+function atualizarContagem() {
+
+    /*
+       DATA DO EVENTO
+
+       24 de setembro de 2026
+       às 21:00
+       Horário de Brasília
+    */
+
+    const evento =
+        new Date("2026-09-24T21:00:00-03:00");
+
+    const agora = new Date();
+
+    let diferenca =
+        evento.getTime() - agora.getTime();
+
+
+    /* SE O EVENTO JÁ COMEÇOU */
+
+    if (diferenca <= 0) {
+
+        document.getElementById("dias").textContent = "00";
+        document.getElementById("horas").textContent = "00";
+        document.getElementById("minutos").textContent = "00";
+        document.getElementById("segundos").textContent = "00";
+
+        return;
+    }
+
+
+    /* CALCULA OS VALORES */
+
+    const dias =
+        Math.floor(diferenca / (1000 * 60 * 60 * 24));
+
+    diferenca %= (1000 * 60 * 60 * 24);
+
+
+    const horas =
+        Math.floor(diferenca / (1000 * 60 * 60));
+
+    diferenca %= (1000 * 60 * 60);
+
+
+    const minutos =
+        Math.floor(diferenca / (1000 * 60));
+
+    diferenca %= (1000 * 60);
+
+
+    const segundos =
+        Math.floor(diferenca / 1000);
+
+
+    /* MOSTRA NA TELA */
+
+    document.getElementById("dias").textContent =
+        String(dias).padStart(2, "0");
+
+    document.getElementById("horas").textContent =
+        String(horas).padStart(2, "0");
+
+    document.getElementById("minutos").textContent =
+        String(minutos).padStart(2, "0");
+
+    document.getElementById("segundos").textContent =
+        String(segundos).padStart(2, "0");
+
+}
+
+
+/* ATUALIZA IMEDIATAMENTE */
+
+atualizarContagem();
+
+
+/* ATUALIZA A CADA SEGUNDO */
+
+setInterval(atualizarContagem, 1000);
+
+</script>
+
+</body>
+
+</html>
 
 </body>
 
