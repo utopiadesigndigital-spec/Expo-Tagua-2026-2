@@ -2,14 +2,19 @@
 <html lang="pt-BR">
 
 <head>
+
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=192, height=384, initial-scale=1.0">
+      content="width=192, height=384, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>Expo Taguaí 2026</title>
 
 <style>
+
+/* =========================================
+   CONFIGURAÇÃO GERAL
+   ========================================= */
 
 * {
     margin: 0;
@@ -21,19 +26,41 @@ html,
 body {
     width: 192px;
     height: 384px;
+
+    margin: 0;
+    padding: 0;
+
     overflow: hidden;
+
     background: #000;
 }
 
+
+/* =========================================
+   TELA PRINCIPAL
+   ========================================= */
+
 #tela {
+
     position: relative;
+
     width: 192px;
     height: 384px;
+
     overflow: hidden;
+
+    background: #000;
 }
 
+
+/* =========================================
+   IMAGEM DE FUNDO
+   ========================================= */
+
 #fundo {
+
     position: absolute;
+
     left: 0;
     top: 0;
 
@@ -43,98 +70,177 @@ body {
     display: block;
 
     object-fit: fill;
+
+    z-index: 1;
 }
 
-/* ÁREA DA CONTAGEM */
+
+/* =========================================
+   CONTADOR
+   ========================================= */
 
 #contador {
+
     position: absolute;
 
-    left: 12px;
-    top: 150px;
+    /*
+       CENTRALIZAÇÃO ABSOLUTA
+       A área inteira tem exatamente 192px.
+    */
 
-    width: 150px;
+    left: 0;
+    top: 210px;
+
+    width: 192px;
 
     text-align: center;
 
-    font-family: Arial, sans-serif;
+    z-index: 10;
 
-    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+
+    color: #ffffff;
 }
 
-/* TEXTO "FALTAM" */
+
+/* =========================================
+   "FALTAM"
+   ========================================= */
 
 #titulo {
-    font-size: 11px;
-    font-weight: bold;
 
-    letter-spacing: 2px;
+    width: 192px;
 
-    margin-bottom: 7px;
+    margin: 0 0 8px 0;
+
+    text-align: center;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    line-height: 12px;
+
+    color: #ffffff;
 
     text-shadow:
-        0 0 4px #000,
-        0 0 8px #000;
+        0 2px 4px rgba(0,0,0,0.9),
+        0 0 8px rgba(0,0,0,0.9);
 }
 
-/* NÚMEROS */
+
+/* =========================================
+   GRADE DOS NÚMEROS
+   ========================================= */
 
 #numeros {
+
+    width: 150px;
+
+    margin: 0 auto;
+
     display: grid;
 
     grid-template-columns: 1fr 1fr;
 
-    gap: 7px;
+    column-gap: 12px;
+
+    row-gap: 9px;
+
 }
 
-/* CADA BLOCO */
+
+/* =========================================
+   CADA BLOCO
+   ========================================= */
 
 .bloco {
+
+    width: 69px;
+
     text-align: center;
+
 }
 
-/* NÚMERO */
+
+/* =========================================
+   NÚMEROS
+   ========================================= */
 
 .numero {
-    font-size: 27px;
+
+    width: 69px;
+
+    font-size: 25px;
 
     font-weight: 900;
 
-    line-height: 1;
+    line-height: 27px;
 
-    color: #fff;
+    text-align: center;
+
+    color: #ffffff;
 
     text-shadow:
-        0 0 4px #000,
-        0 0 8px #000;
+        0 2px 4px rgba(0,0,0,1),
+        0 0 8px rgba(0,0,0,1);
 }
 
-/* LABEL */
+
+/* =========================================
+   LABELS
+   ========================================= */
 
 .label {
-    margin-top: 3px;
 
-    font-size: 7px;
+    width: 69px;
 
-    font-weight: bold;
+    margin-top: 2px;
+
+    text-align: center;
+
+    font-size: 6px;
+
+    font-weight: 700;
 
     letter-spacing: 1px;
 
-    color: #fff;
+    line-height: 8px;
+
+    color: #ffffff;
 
     text-shadow:
-        0 0 3px #000;
+        0 2px 3px rgba(0,0,0,1);
 }
+
+
+/* =========================================
+   IMPORTANTE:
+   ÁREA DOS PATROCINADORES
+   FICA LIVRE.
+
+   O contador termina aproximadamente
+   antes dos 280px.
+
+   O espaço de patrocinadores começa
+   aproximadamente nos 301px.
+   ========================================= */
 
 </style>
 
 </head>
 
+
 <body>
 
 <div id="tela">
 
-    <!-- FUNDO DA EXPO -->
+
+    <!-- =====================================
+         FUNDO DA EXPO
+         ===================================== -->
 
     <img
         id="fundo"
@@ -142,7 +248,10 @@ body {
         alt="Expo Taguaí 2026"
     >
 
-    <!-- CONTAGEM -->
+
+    <!-- =====================================
+         CONTADOR
+         ===================================== -->
 
     <div id="contador">
 
@@ -150,103 +259,206 @@ body {
             FALTAM
         </div>
 
+
         <div id="numeros">
 
-            <div class="bloco">
-                <div class="numero" id="dias">00</div>
-                <div class="label">DIAS</div>
-            </div>
+
+            <!-- DIAS -->
 
             <div class="bloco">
-                <div class="numero" id="horas">00</div>
-                <div class="label">HORAS</div>
+
+                <div
+                    class="numero"
+                    id="dias">
+                    00
+                </div>
+
+                <div class="label">
+                    DIAS
+                </div>
+
             </div>
 
-            <div class="bloco">
-                <div class="numero" id="minutos">00</div>
-                <div class="label">MINUTOS</div>
-            </div>
+
+            <!-- HORAS -->
 
             <div class="bloco">
-                <div class="numero" id="segundos">00</div>
-                <div class="label">SEGUNDOS</div>
+
+                <div
+                    class="numero"
+                    id="horas">
+                    00
+                </div>
+
+                <div class="label">
+                    HORAS
+                </div>
+
             </div>
+
+
+            <!-- MINUTOS -->
+
+            <div class="bloco">
+
+                <div
+                    class="numero"
+                    id="minutos">
+                    00
+                </div>
+
+                <div class="label">
+                    MINUTOS
+                </div>
+
+            </div>
+
+
+            <!-- SEGUNDOS -->
+
+            <div class="bloco">
+
+                <div
+                    class="numero"
+                    id="segundos">
+                    00
+                </div>
+
+                <div class="label">
+                    SEGUNDOS
+                </div>
+
+            </div>
+
 
         </div>
 
     </div>
 
+
 </div>
 
+
+<!-- =========================================
+     JAVASCRIPT DA CONTAGEM
+     ========================================= -->
 
 <script>
 
 function atualizarContagem() {
 
     /*
-       DATA DO EVENTO
+       EVENTO:
 
-       24 de setembro de 2026
-       às 21:00
-       Horário de Brasília
+       24 DE SETEMBRO DE 2026
+       ÀS 21:00
+       HORÁRIO DE BRASÍLIA
     */
 
     const evento =
         new Date("2026-09-24T21:00:00-03:00");
 
-    const agora = new Date();
+
+    const agora =
+        new Date();
+
 
     let diferenca =
         evento.getTime() - agora.getTime();
 
 
-    /* SE O EVENTO JÁ COMEÇOU */
+    /*
+       SE O EVENTO JÁ COMEÇOU
+    */
 
     if (diferenca <= 0) {
 
         document.getElementById("dias").textContent = "00";
+
         document.getElementById("horas").textContent = "00";
+
         document.getElementById("minutos").textContent = "00";
+
         document.getElementById("segundos").textContent = "00";
 
         return;
     }
 
 
-    /* CALCULA OS VALORES */
+    /*
+       DIAS
+    */
 
     const dias =
-        Math.floor(diferenca / (1000 * 60 * 60 * 24));
+        Math.floor(
+            diferenca /
+            (1000 * 60 * 60 * 24)
+        );
 
-    diferenca %= (1000 * 60 * 60 * 24);
 
+    diferenca =
+        diferenca %
+        (1000 * 60 * 60 * 24);
+
+
+    /*
+       HORAS
+    */
 
     const horas =
-        Math.floor(diferenca / (1000 * 60 * 60));
+        Math.floor(
+            diferenca /
+            (1000 * 60 * 60)
+        );
 
-    diferenca %= (1000 * 60 * 60);
 
+    diferenca =
+        diferenca %
+        (1000 * 60 * 60);
+
+
+    /*
+       MINUTOS
+    */
 
     const minutos =
-        Math.floor(diferenca / (1000 * 60));
+        Math.floor(
+            diferenca /
+            (1000 * 60)
+        );
 
-    diferenca %= (1000 * 60);
 
+    diferenca =
+        diferenca %
+        (1000 * 60);
+
+
+    /*
+       SEGUNDOS
+    */
 
     const segundos =
-        Math.floor(diferenca / 1000);
+        Math.floor(
+            diferenca /
+            1000
+        );
 
 
-    /* MOSTRA NA TELA */
+    /*
+       ATUALIZA OS NÚMEROS
+    */
 
     document.getElementById("dias").textContent =
         String(dias).padStart(2, "0");
 
+
     document.getElementById("horas").textContent =
         String(horas).padStart(2, "0");
 
+
     document.getElementById("minutos").textContent =
         String(minutos).padStart(2, "0");
+
 
     document.getElementById("segundos").textContent =
         String(segundos).padStart(2, "0");
@@ -254,16 +466,24 @@ function atualizarContagem() {
 }
 
 
-/* ATUALIZA IMEDIATAMENTE */
+/*
+   PRIMEIRA ATUALIZAÇÃO
+*/
 
 atualizarContagem();
 
 
-/* ATUALIZA A CADA SEGUNDO */
+/*
+   ATUALIZA A CADA 1 SEGUNDO
+*/
 
-setInterval(atualizarContagem, 1000);
+setInterval(
+    atualizarContagem,
+    1000
+);
 
 </script>
+
 
 </body>
 
